@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+#LIMPAR A TELA PRIMEIRO
+clear
+# FUNÇÕES
+
+soma() {
+    res=$(echo "scale=2; $n1 + $n2" | bc)
+    echo -e "\n"
+    echo "A soma de $n1 e $n2 eh: $res"
+}
+
+subtracao() {
+    res=$(echo "scale=2; $n1 - $n2" | bc)
+    echo -e "\n"
+    echo "A subtração de $n1 por $n2 eh: $res"
+}
+
+divisao() {
+    res=$(echo "scale=2; $n1 / $n2" | bc)
+    echo -e "\n"
+    echo "A divisão de $n1 por $n2 eh: $res"
+}
+
+multiplicacao() {
+    res=$(echo "scale=2; $n1 * $n2" | bc)
+    echo -e "\n"
+    echo "A multiplicação de $n1 e $n2 eh: $res"
+}
+
+potencia() {
+    res=$(echo "scale=2; $n1^$n2" | bc)
+    echo -e "\n"
+    echo "$n1 elevado a potencia $n2 eh: $res"
+}
+
+raiz() {
+    read -p "Digite o numero: " n1
+    res=$(echo "scale=2; sqrt($n1)" | bc)
+    echo "A raiz quadrada de $n1 eh: $res"
+}
+
+# HEADER
+echo "--------------------------------------------"
+echo "         BEM VINDO A CALCULADORA            "
+echo "--------------------------------------------"
+
+while true; do
+    # ESCOLHENDO FUNÇÃO DA CALCULADORA
+    echo -e "\n"
+    echo "Escolha uma opção!"
+    echo "1. SOMA"
+    echo "2. SUBTRAÇÃO"
+    echo "3. DIVISÃO"
+    echo "4. MULTIPLICAÇÃO"
+    echo "5. POTENCIA"
+    echo "6. RAIZ"
+    read -p "Escolha uma opção (1-6): " op
+
+    # ESTRUTURA CONDICIONAL
+    case $op in
+        1|2|3|4|5)
+            # USUARIO INSERE OS VALORES
+            read -p "Digite o primeiro numero: " n1
+            read -p "Digite o segundo numero: " n2
+            ;;
+	6) raiz ;;
+        *)
+            echo "Escolha um número válido (1-6)" ;;
+    esac
+
+    case $op in
+        1) soma ;;
+        2) subtracao ;;
+        3) divisao ;;
+        4) multiplicacao ;;
+	5) potencia ;;
+    esac
+
+    # Perguntar ao usuário se deseja continuar ou sair
+    echo -e "\n"
+    read -p "Deseja continuar? (s/n): " continuar
+    if [[ $continuar != "s" ]]; then
+	echo -e "\n"
+        break
+    fi
+done
